@@ -1,0 +1,31 @@
+ARXH:	LDA 2000H
+	CPI 64H
+	JNC POLYMEGALOS
+	
+	MVI B,FFH        
+DECA:	INR B
+	SUI 0AH
+	JNC DECA
+	ADI 0AH
+
+	MOV D,A
+	MOV A,B
+	RLC
+	RLC
+	RLC
+	RLC
+	ADD D
+	CMA
+	STA 3000H
+	JMP ARXH
+
+POLYMEGALOS: LXI B,01F4H
+             MVI A,00H 
+	      STA 3000H
+             CALL DELB
+             MVI A,FFH
+             STA 3000H
+             CALL DELB
+	      JMP ARXH
+
+END

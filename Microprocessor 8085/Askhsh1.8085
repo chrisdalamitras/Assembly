@@ -1,0 +1,12 @@
+ARXH: MVI  C,08H
+              LDA 2000H
+ADR2:  RAL
+              JC ADR1
+              DCR C
+              JNZ ADR2
+ADR1:  MOV A,C
+              CMA
+              STA 3000H
+              RST 1
+              JMP ARXH
+END

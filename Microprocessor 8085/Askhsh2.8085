@@ -1,0 +1,27 @@
+LXI B,01F4H ;Δίνουμε τιμή για καθυστέρηση 0.5 sec 
+    MVI D,FEH ;Χρησιμοποιείται για δεξιά η αριστερή ολίσθηση
+    MVI E,01H ;Χρησιμοποιείυαι για έλεγχο LSB bit
+
+LOOPP:  LDA 2000H ;Έλεγχος του 2ου LSB bit
+        ANI 02H
+        JNZ LOOPP
+
+        LDA 2000H ;Έλεγχος του 1ου LSB bit
+	 ANA E
+	 JNZ right
+	
+left:	MOV A,D ;Αριστερή κίνηση των LED
+	STA 3000H
+	CALL DELB ;Χρονοκαθυστέρηση 0.5 sec
+	RLC       
+	MOV D,A
+	JMP LOOPP
+
+right:  MOV A,D ;Δεξιά κίνηση των LED
+	 STA 3000H
+	 CALL DELB ;Χρονοκαθυστέρηση 0.5 sec
+	 RRC
+	 MOV D,A
+	 JMP LOOPP
+
+END
